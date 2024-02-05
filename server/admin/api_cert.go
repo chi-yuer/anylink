@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 func CustomCert(w http.ResponseWriter, r *http.Request) {

@@ -8,8 +8,9 @@
 FROM node:16-alpine3.18 as builder_node
 WORKDIR /web
 COPY ./web /web
-RUN yarn install \
-    && yarn run build \
+RUN npm install -g pnpm \
+    && pnpm install \
+    && pnpm run build \
     && ls /web/ui
 
 

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 func UserIpMapList(w http.ResponseWriter, r *http.Request) {

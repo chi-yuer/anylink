@@ -1,8 +1,8 @@
 package cron
 
 import (
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 // 清除用户活动日志

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/pkg/utils"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/pkg/utils"
 	"github.com/gorilla/mux"
 	"github.com/xlzd/gotp"
 )

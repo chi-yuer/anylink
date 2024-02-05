@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/sessdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/sessdata"
 	"github.com/pion/dtls/v2"
 	"github.com/pion/dtls/v2/pkg/crypto/selfsign"
 	"github.com/pion/logging"

@@ -1,6 +1,6 @@
 [Unit]
 Description=AnyLink Server Service
-Documentation=https://github.com/bjdgyc/anylink
+Documentation=https://github.com/chi-yuer/anylink
 After=network-online.target
 
 [Service]

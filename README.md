@@ -1,22 +1,18 @@
 # AnyLink
 
-[![Go](https://github.com/bjdgyc/anylink/workflows/Go/badge.svg?branch=main)](https://github.com/bjdgyc/anylink/actions)
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/bjdgyc/anylink)](https://pkg.go.dev/github.com/bjdgyc/anylink)
-[![Go Report Card](https://goreportcard.com/badge/github.com/bjdgyc/anylink)](https://goreportcard.com/report/github.com/bjdgyc/anylink)
-[![codecov](https://codecov.io/gh/bjdgyc/anylink/graph/badge.svg?token=JTFLIIIBQ0)](https://codecov.io/gh/bjdgyc/anylink)
-![GitHub release](https://img.shields.io/github/v/release/bjdgyc/anylink)
-![GitHub downloads total)](https://img.shields.io/github/downloads/bjdgyc/anylink/total)
-![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/bjdgyc/anylink/latest/total)
-[![Docker pulls)](https://img.shields.io/docker/pulls/bjdgyc/anylink.svg)](https://hub.docker.com/r/bjdgyc/anylink)
-![LICENSE](https://img.shields.io/github/license/bjdgyc/anylink)
+[![Go](https://github.com/chi-yuer/anylink/workflows/Go/badge.svg?branch=main)](https://github.com/chi-yuer/anylink/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/chi-yuer/anylink)](https://goreportcard.com/report/github.com/chi-yuer/anylink)
+[![codecov](https://codecov.io/gh/chi-yuer/anylink/graph/badge.svg?token=JTFLIIIBQ0)](https://codecov.io/gh/chi-yuer/anylink)
+![GitHub release](https://img.shields.io/github/v/release/chi-yuer/anylink)
+![GitHub downloads total)](https://img.shields.io/github/downloads/chi-yuer/anylink/total)
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/chi-yuer/anylink/latest/total)
+![LICENSE](https://img.shields.io/github/license/chi-yuer/anylink)
 
 AnyLink 是一个企业级远程办公 sslvpn 的软件，可以支持多人同时在线使用。
 
-## Repo
+## Customize
 
-> github: https://github.com/bjdgyc/anylink
-
-> gitee: https://gitee.com/bjdgyc/anylink
+> fork from: https://github.com/bjdgyc/anylink
 
 ## Introduction
 
@@ -32,25 +28,15 @@ AnyLink 服务端仅在 CentOS 7、CentOS 8、Ubuntu 18.04、Ubuntu 20.04 测试
 
 ![online](doc/screenshot/online.jpg)
 
-## Donate
-
-> 如果您觉得 anylink 对你有帮助，欢迎给我们打赏，也是帮助 anylink 更好的发展。
->
-> [查看打赏列表](doc/README.md)
-
-<p>
-    <img src="doc/screenshot/wxpay2.png" width="400" />
-</p>
-
 ## Installation
 
 > 没有编程基础的同学建议直接下载 release 包，从下面的地址下载 anylink-deploy.tar.gz
 >
-> https://github.com/bjdgyc/anylink/releases
+> https://github.com/chi-yuer/anylink/releases
 
 ### 使用问题
 
-> 对于测试环境，可以使用 vpn.test.vqilu.cn 绑定host进行测试
+> 对于测试环境，可以使用 vpn.test.vqilu.cn 绑定 host 进行测试
 >
 > 对于线上环境，必须申请安全的 https 证书，不支持私有证书连接
 >
@@ -60,21 +46,21 @@ AnyLink 服务端仅在 CentOS 7、CentOS 8、Ubuntu 18.04、Ubuntu 20.04 测试
 >
 > 其他问题 [前往查看](doc/question.md)
 >
-> 默认管理后台访问地址  https://host:8800  默认账号密码 admin 123456
+> 默认管理后台访问地址 https://host:8800 默认账号密码 admin 123456
 >
-> 首次使用，请在浏览器访问  https://域名:443   浏览器提示安全后，在客户端输入 【域名:443】 即可
+> 首次使用，请在浏览器访问 https://域名:443 浏览器提示安全后，在客户端输入 【域名:443】 即可
 
 ### 自行编译安装
 
 > 需要提前安装好 golang >= 1.20 和 nodejs >= 16.x 和 yarn >= v1.22.x
 
 ```shell
-git clone https://github.com/bjdgyc/anylink.git
+git clone https://github.com/chi-yuer/anylink.git
 
 # 编译参考软件版本
 # go 1.20.12
 # node v16.20.2
-# yarn 1.22.19
+# pnpm 8.14.3
 
 
 cd anylink
@@ -114,8 +100,8 @@ sudo ./anylink
 - [x] 访问权限管理
 - [x] IP 访问审计功能
 - [x] 域名动态拆分隧道（域名路由功能）
-- [x] radius认证支持
-- [x] LDAP认证支持
+- [x] radius 认证支持
+- [x] LDAP 认证支持
 - [ ] 基于 ipvtap 设备的桥接访问模式
 
 ## Config
@@ -133,7 +119,7 @@ sudo ./anylink
 > 数据库配置示例
 
 | db_type  | db_source                                              |
-|----------|--------------------------------------------------------|
+| -------- | ------------------------------------------------------ |
 | sqlite3  | ./conf/anylink.db                                      |
 | mysql    | user:password@tcp(127.0.0.1:3306)/anylink?charset=utf8 |
 | postgres | user:password@localhost/anylink?sslmode=verify-full    |
@@ -233,19 +219,19 @@ ipv4_end = "10.1.2.200"
 
 1. 添加 anylink 程序
 
-    - anylink 程序目录放入 `/usr/local/anylink-deploy`
-    - 添加执行权限 `chmod +x /usr/local/anylink-deploy/anylink`
+   - anylink 程序目录放入 `/usr/local/anylink-deploy`
+   - 添加执行权限 `chmod +x /usr/local/anylink-deploy/anylink`
 
 2. systemd/anylink.service 脚本放入：
 
-    - centos: `/usr/lib/systemd/system/`
-    - ubuntu: `/lib/systemd/system/`
+   - centos: `/usr/lib/systemd/system/`
+   - ubuntu: `/lib/systemd/system/`
 
 3. 操作命令:
 
-    - 启动: `systemctl start anylink`
-    - 停止: `systemctl stop anylink`
-    - 开机自启: `systemctl enable anylink`
+   - 启动: `systemctl start anylink`
+   - 停止: `systemctl stop anylink`
+   - 开机自启: `systemctl enable anylink`
 
 ## Docker
 
@@ -253,27 +239,27 @@ ipv4_end = "10.1.2.200"
 
    ```bash
    # 具体tag可以从docker hub获取
-   # https://hub.docker.com/r/bjdgyc/anylink/tags
-   docker pull bjdgyc/anylink:latest
+   # https://hub.docker.com/r/chi-yuer/anylink/tags
+   docker pull chi-yuer/anylink:latest
    ```
 
 2. 查看命令信息
 
    ```bash
-   docker run -it --rm bjdgyc/anylink -h
+   docker run -it --rm chi-yuer/anylink -h
    ```
 
 3. 生成密码
 
    ```bash
-   docker run -it --rm bjdgyc/anylink tool -p 123456
+   docker run -it --rm chi-yuer/anylink tool -p 123456
    #Passwd:$2a$10$lCWTCcGmQdE/4Kb1wabbLelu4vY/cUwBwN64xIzvXcihFgRzUvH2a
    ```
 
 4. 生成 jwt secret
 
    ```bash
-   docker run -it --rm bjdgyc/anylink tool -s
+   docker run -it --rm chi-yuer/anylink tool -s
    #Secret:9qXoIhY01jqhWIeIluGliOS4O_rhcXGGGu422uRZ1JjZxIZmh17WwzW36woEbA
    ```
 
@@ -283,16 +269,17 @@ ipv4_end = "10.1.2.200"
    docker run -itd --name anylink --privileged \
        -p 443:443 -p 8800:8800 \
        --restart=always \
-       bjdgyc/anylink
+       chi-yuer/anylink
    ```
 
 6. 使用自定义参数启动容器
+
    ```bash
    # 参数可以参考 -h 命令
    docker run -itd --name anylink --privileged \
        -p 443:443 -p 8800:8800 \
        --restart=always \
-       bjdgyc/anylink \
+       chi-yuer/anylink \
        -c=/etc/server.toml --ip_lease=1209600 # IP地址租约时长
    ```
 
@@ -300,7 +287,7 @@ ipv4_end = "10.1.2.200"
 
    ```bash
    #获取仓库源码
-   git clone https://github.com/bjdgyc/anylink.git
+   git clone https://github.com/chi-yuer/anylink.git
    # 构建镜像
    docker build -t anylink -f docker/Dockerfile .
    ```
@@ -311,9 +298,9 @@ ipv4_end = "10.1.2.200"
 
 ## Discussion
 
-添加QQ群(1)(已满): 567510628
+添加 QQ 群(1)(已满): 567510628
 
-添加QQ群(2): 739072205
+添加 QQ 群(2): 739072205
 
 群共享文件有相关软件下载
 
@@ -328,7 +315,6 @@ ipv4_end = "10.1.2.200"
 - [AnyConnect Secure Client](https://www.cisco.com/) (可通过群文件下载: Windows/macOS/Linux/Android/iOS)
 - [OpenConnect](https://gitlab.com/openconnect/openconnect) (Windows/macOS/Linux)
 - [AnyLink Secure Client](https://github.com/tlslink/anylink-client) (Windows/macOS/Linux)
-
 
 ## Contribution
 
@@ -352,9 +338,3 @@ ipv4_end = "10.1.2.200"
 ## License
 
 本项目采用 AGPL-3.0 开源授权许可证，完整的授权说明已放置在 LICENSE 文件中。
-
-## Thank
-
-<a href="https://www.jetbrains.com">
-    <img src="doc/screenshot/jetbrains.png" width="200" alt="jetbrains.png" />
-</a>

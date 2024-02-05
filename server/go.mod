@@ -1,4 +1,4 @@
-module github.com/bjdgyc/anylink
+module github.com/chi-yuer/anylink
 
 go 1.20
 

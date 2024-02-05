@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/bjdgyc/anylink/pkg/utils"
+	"github.com/chi-yuer/anylink/pkg/utils"
 )
 
 const (

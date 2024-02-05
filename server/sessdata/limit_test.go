@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bjdgyc/anylink/base"
+	"github.com/chi-yuer/anylink/base"
 )
 
 // func TestCheckUser(t *testing.T) {

@@ -3,8 +3,8 @@ package cron
 import (
 	"time"
 
-	"github.com/bjdgyc/anylink/dbdata"
-	"github.com/bjdgyc/anylink/sessdata"
+	"github.com/chi-yuer/anylink/dbdata"
+	"github.com/chi-yuer/anylink/sessdata"
 	"github.com/go-co-op/gocron"
 )
 

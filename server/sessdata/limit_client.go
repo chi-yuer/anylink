@@ -3,7 +3,7 @@ package sessdata
 import (
 	"sync"
 
-	"github.com/bjdgyc/anylink/base"
+	"github.com/chi-yuer/anylink/base"
 )
 
 const limitAllKey = "__ALL__"

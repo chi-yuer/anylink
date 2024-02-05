@@ -10,8 +10,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/dbdata"
 	mapset "github.com/deckarep/golang-set"
 	atomic2 "go.uber.org/atomic"
 )

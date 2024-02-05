@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/bjdgyc/anylink/base"
+	"github.com/chi-yuer/anylink/base"
 	"github.com/ivpusic/grpool"
 	"github.com/spf13/cast"
 	"xorm.io/xorm"

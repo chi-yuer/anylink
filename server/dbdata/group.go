@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
+	"github.com/chi-yuer/anylink/base"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 )

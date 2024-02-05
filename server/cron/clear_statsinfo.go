@@ -3,8 +3,8 @@ package cron
 import (
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 const siLifeDay = 30

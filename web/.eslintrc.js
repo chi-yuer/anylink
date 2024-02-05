@@ -1,17 +1,102 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
-  },
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended'
+  globals: {},
+  extends: [
+    "eslint-config-ali/typescript/vue",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/vue",
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-  }
-}
+    curly: ["error", "all"],
+    "eol-last": ["error", "always"],
+    "max-len": [
+      "error",
+      {
+        code: 160,
+      },
+    ],
+    "max-lines": [
+      "error",
+      {
+        max: 3000,
+        skipBlankLines: true,
+      },
+    ],
+    "max-lines-per-function": [
+      "error",
+      {
+        max: 240,
+        skipBlankLines: true,
+      },
+    ],
+    radix: "error",
+    quotes: ["error", "double"],
+    "prefer-template": "error",
+    "no-param-reassign": "error",
+    eqeqeq: ["error", "always"],
+    "default-case": "error",
+    "max-depth": ["error", 4],
+    "guard-for-in": "error",
+    "no-else-return": "error",
+    "no-alert": "error",
+    "no-console": "error",
+    camelcase: "error",
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": "allow-with-description",
+        "ts-nocheck": "allow-with-description",
+        "ts-check": "allow-with-description",
+      },
+    ],
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        default: [
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "static-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-field",
+          "protected-field",
+          "private-field",
+          "instance-field",
+          "field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method",
+          "public-method",
+          "protected-method",
+          "private-method",
+          "instance-method",
+          "method",
+        ],
+      },
+    ],
+    "@typescript-eslint/no-confusing-non-null-assertion": "error",
+    "@typescript-eslint/no-empty-interface": "error",
+    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/no-this-alias": [
+      "error",
+      {
+        allowDestructuring: true,
+      },
+    ],
+    "@typescript-eslint/prefer-as-const": "error",
+    "@typescript-eslint/quotes": ["error", "double", { avoidEscape: true }],
+    "@typescript-eslint/restrict-plus-operands": "error",
+  },
+};

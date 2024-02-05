@@ -5,9 +5,9 @@ import (
 	"io"
 	"net"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/pkg/arpdis"
-	"github.com/bjdgyc/anylink/sessdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/pkg/arpdis"
+	"github.com/chi-yuer/anylink/sessdata"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"github.com/songgao/packets/ethernet"

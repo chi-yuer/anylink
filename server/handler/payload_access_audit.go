@@ -6,10 +6,10 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/dbdata"
-	"github.com/bjdgyc/anylink/pkg/utils"
-	"github.com/bjdgyc/anylink/sessdata"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/dbdata"
+	"github.com/chi-yuer/anylink/pkg/utils"
+	"github.com/chi-yuer/anylink/sessdata"
 	"github.com/ivpusic/grpool"
 	"github.com/songgao/water/waterutil"
 )

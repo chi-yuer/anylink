@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/bjdgyc/anylink/admin"
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/admin"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 func LinkHome(w http.ResponseWriter, r *http.Request) {

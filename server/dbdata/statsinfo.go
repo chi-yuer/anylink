@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/bjdgyc/anylink/base"
+	"github.com/chi-yuer/anylink/base"
 )
 
 const (

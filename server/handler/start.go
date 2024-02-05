@@ -5,11 +5,11 @@ import (
 	"encoding/hex"
 	"os"
 
-	"github.com/bjdgyc/anylink/admin"
-	"github.com/bjdgyc/anylink/base"
-	"github.com/bjdgyc/anylink/cron"
-	"github.com/bjdgyc/anylink/dbdata"
-	"github.com/bjdgyc/anylink/sessdata"
+	"github.com/chi-yuer/anylink/admin"
+	"github.com/chi-yuer/anylink/base"
+	"github.com/chi-yuer/anylink/cron"
+	"github.com/chi-yuer/anylink/dbdata"
+	"github.com/chi-yuer/anylink/sessdata"
 )
 
 func Start() {

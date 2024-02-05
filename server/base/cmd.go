@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/bjdgyc/anylink/pkg/utils"
+	"github.com/chi-yuer/anylink/pkg/utils"
 	"github.com/skip2/go-qrcode"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/bjdgyc/anylink/dbdata"
+	"github.com/chi-yuer/anylink/dbdata"
 )
 
 func StatsInfoList(w http.ResponseWriter, r *http.Request) {

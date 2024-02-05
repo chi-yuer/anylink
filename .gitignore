@@ -1,7 +1,10 @@
 # Binaries for programs and plugins
 .idea/
+.vite/
 anylink-deploy
 anylink-deploy.tar.gz
 
 dist
 godist
+
+*.bak

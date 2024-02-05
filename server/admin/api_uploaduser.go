@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bjdgyc/anylink/dbdata"
-	"github.com/bjdgyc/anylink/pkg/utils"
+	"github.com/chi-yuer/anylink/dbdata"
+	"github.com/chi-yuer/anylink/pkg/utils"
 	mapset "github.com/deckarep/golang-set"
 	"github.com/spf13/cast"
 	"github.com/xuri/excelize/v2"

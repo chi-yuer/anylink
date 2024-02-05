@@ -19,12 +19,13 @@ echo "编译前端项目"
 cd $cpath/web
 #国内可替换源加快速度
 #npx browserslist@latest --update-db
-#npm install --registry=https://registry.npm.taobao.org
-#npm install
-#npm run build
+#pnpm install --registry=https://registry.npm.taobao.org
+#pnpm install
+#pnpm run build
 
-yarn install --registry=https://registry.npmmirror.com
-yarn run build
+npx browserslist@latest --update-db
+pnpm install --registry=https://registry.npmmirror.com
+pnpm run build
 
 
 RETVAL $?
