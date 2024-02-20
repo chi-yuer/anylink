@@ -1,0 +1,78 @@
+/*
+ * @Author: Quarter
+ * @Date: 2024-02-19 13:51:24
+ * @LastEditors: Quarter
+ * @LastEditTime: 2024-02-20 15:27:00
+ * @FilePath: /anylink/web/src/data/system.ts
+ * @Description: 系统配置相关
+ */
+
+import {
+  AuditConfig,
+  MailConfig,
+  OtherConfig,
+  SSLALiYunConfig,
+  SSLApplyConfig,
+  SSLCloudflareConfig,
+  SSLCustomConfig,
+  SSLTencentCloudConfig,
+} from "@/types";
+
+// 邮件配置
+export const MAIL_CONFIG: MailConfig = {
+  encryption: "None", // 加密类型
+  from: "", // 来源地址
+  host: "", // 主机地址
+  password: "", // 密码
+  port: 25, // 端口号
+  username: "", // 用户名
+};
+
+// 审计配置
+export const AUDIT_CONFIG: AuditConfig = {
+  audit_interval: -1, // 审计去重间隔
+  clear_time: "00:00", // 清理时间
+  life_day: 0, // 存储时间
+};
+
+// SSL 自定义配置
+export const SSL_CUSTOM_CONFIG: SSLCustomConfig = {
+  cert: null, // SSL 证书文件
+  key: null, // SSL 私钥文件
+};
+
+// SSL 阿里云初始配置
+export const SSL_ALI_YUN_CONFIG: SSLALiYunConfig = {
+  apiKey: "", // APIKey
+  secretKey: "", // SecretKey
+};
+
+// SSL Cloudflare 初始配置
+export const SSL_CLOUDFLARE_CONFIG: SSLCloudflareConfig = {
+  authToken: "", // 认证 token
+};
+
+// SSL 腾讯云初始配置
+export const SSL_TENCENT_CLOUD_CONFIG: SSLTencentCloudConfig = {
+  secretId: "", // Secret ID
+  secretKey: "", // Secret Key
+};
+
+// Let's Encrypt 证书初始配置
+export const SSL_APPLY_CONFIG: SSLApplyConfig = {
+  aliyun: SSL_ALI_YUN_CONFIG, // 阿里云配置
+  cfcloud: SSL_CLOUDFLARE_CONFIG, // Cloudflare 配置
+  domain: "", // 域名配置
+  legomail: "", // 申请邮箱
+  name: "", // 域名提供商
+  renew: false, // 是否自动续期
+  txcloud: SSL_TENCENT_CLOUD_CONFIG, // 腾讯云配置
+};
+
+// 其它配置
+export const OTHER_CONFIG: OtherConfig = {
+  account_mail: "", // 账号邮件模板
+  banner: "", // 横幅
+  homeindex: "", // 主页内容
+  link_addr: "", // 连接地址
+};

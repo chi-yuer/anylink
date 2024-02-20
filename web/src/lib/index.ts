@@ -9,6 +9,7 @@
 
 export * as auth from "./auth";
 export * as date from "./date";
+export * as form from "./form";
 export * as net from "./net";
 export * as number from "./number";
 export * as object from "./object";
