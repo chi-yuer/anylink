@@ -8,5 +8,6 @@
  */
 
 export * from "./group";
+export * from "./log";
 export * from "./system";
 export * from "./user";
