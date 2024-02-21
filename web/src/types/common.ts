@@ -8,11 +8,11 @@
  */
 
 // 分页数据
-export interface PaginationData<T> {
+export type PaginationData<T, T2 = {}> = {
   count: number; // 总数
   page_size: number; // 分页大小
   datas: T[]; // 数据列表
-}
+} & T2;
 
 export type PaginationParam<T> = {
   pageNo: number; // 页码
@@ -31,4 +31,12 @@ export interface ACLConfig {
   note: string; // 备注
   port: number; // 端口号
   val: string; // 值
+}
+
+// 菜单项配置
+export interface MenuItemConfig {
+  icon?: string; // 图标
+  title: string; // 菜单名称
+  path: string; // 路径
+  children?: MenuItemConfig[]; // 子菜单配置
 }

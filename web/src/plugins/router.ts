@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:27:29
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-05 17:05:58
+ * @LastEditTime: 2024-02-21 14:24:28
  * @FilePath: /anylink/web/src/plugins/router.ts
  * @Description: vue-router 插件配置
  */
@@ -30,8 +30,19 @@ const routes: RouteRecordRaw[] = [
       // 系统配置
       { path: "system", redirect: { path: "/admin/system/status" } },
       { path: "system/status", component: () => import("@/pages/system/system-status.vue") },
-      { path: "system/config", component: () => import("@/pages/system/system-config.vue") },
-      { path: "system/log", component: () => import("@/pages/system/log-audit.vue") },
+      { path: "system/config", redirect: { path: "/admin/system/config/base" } },
+      {
+        path: "system/config/:category",
+        props: true,
+        component: () => import("@/pages/system/system-config.vue"),
+      },
+
+      { path: "system/log", redirect: { path: "/admin/system/log/action" } },
+      {
+        path: "system/log/:category",
+        props: true,
+        component: () => import("@/pages/system/log-audit.vue"),
+      },
     ],
   },
   { path: "/:catchAll(.*)", redirect: { path: "/admin" } },

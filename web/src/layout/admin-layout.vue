@@ -2,13 +2,16 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:53:26
  * @LastEditors: Quarter
- * @LastEditTime: 2024-01-30 10:23:26
+ * @LastEditTime: 2024-02-21 15:24:26
  * @FilePath: /anylink/web/src/layout/admin-layout.vue
  * @Description: 管理员后台布局
 -->
 <script lang="ts" setup>
 import Logo from "@/assets/logo.svg";
+import { MenuItem } from "@/components";
+import { MENU_LIST } from "@/data/menu";
 import { frameworkStore, userStore } from "@/plugins";
+import { MenuItemConfig } from "@/types";
 import { Icon, MenuValue } from "tdesign-vue-next";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -22,11 +25,50 @@ const user = userStore();
 // 加载动画
 const framework = frameworkStore();
 
+// 当前激活菜单
+const activeMenu = computed(() => {
+  const { result } = findLeafMenu(MENU_LIST, route.path);
+  if (result) {
+    return result;
+  }
+  return undefined;
+});
+
 // 默认展开菜单
 const defaultExpanded = computed(() => {
   const pathArray = route.path.split(/\/+/g).filter((path) => path.length > 0);
-  return new Array(pathArray.length - 1).fill("").map((_, index) => "/" + pathArray.slice(0, index + 1).join("/"));
+  return new Array(pathArray.length - 1)
+    .fill("")
+    .map((_, index) => "/" + pathArray.slice(0, index + 1).join("/"));
 });
+
+/**
+ * @description: 查询叶子菜单
+ * @param {MenuItemConfig[]} menus 菜单配置列表
+ * @param {string} target 匹配目标
+ * @returns {MenuItemConfig}
+ */
+const findLeafMenu = (
+  menus: MenuItemConfig[],
+  target: string,
+): { result: string | undefined; level: number } => {
+  let result: { result: string | undefined; level: number } = { result: undefined, level: 0 };
+  menus
+    .filter(({ path }) => new RegExp(`^${path}`, "g").test(target))
+    .forEach(({ path, children }) => {
+      const stringArr = path.split(/\/+/g);
+      if (stringArr.length > result.level) {
+        result = { result: path, level: stringArr.length };
+      }
+      if (Array.isArray(children) && children.length > 0) {
+        const childrenResult = findLeafMenu(children, target);
+        if (childrenResult.level > result.level) {
+          result = childrenResult;
+        }
+      }
+    });
+  return result;
+};
 
 /**
  * @description: 处理菜单切换
@@ -83,85 +125,11 @@ const handleMenuChange = (value: MenuValue): void => {
       <t-aside>
         <t-menu
           :expand-mutex="true"
-          :default-value="route.path"
+          :value="activeMenu"
           :default-expanded="defaultExpanded"
           @change="handleMenuChange"
         >
-          <t-menu-item value="/admin/dashboard">
-            <template #icon>
-              <icon name="dashboard"></icon>
-            </template>
-            <template #default>仪表盘</template>
-          </t-menu-item>
-          <t-submenu value="/admin/user" title="用户管理">
-            <template #icon>
-              <icon name="user"></icon>
-            </template>
-            <template #default>
-              <t-menu-item value="/admin/user/account">
-                <template #icon>
-                  <icon name="user-list"></icon>
-                </template>
-                <template #default>用户管理</template>
-              </t-menu-item>
-              <t-menu-item value="/admin/user/policy">
-                <template #icon>
-                  <icon name="verify"></icon>
-                </template>
-                <template #default>用户策略</template>
-              </t-menu-item>
-              <t-menu-item value="/admin/user/online">
-                <template #icon>
-                  <icon name="internet"></icon>
-                </template>
-                <template #default>在线用户</template>
-              </t-menu-item>
-              <t-menu-item value="/admin/user/ip">
-                <template #icon>
-                  <icon name="link"></icon>
-                </template>
-                <template #default>IP&nbsp;映射</template>
-              </t-menu-item>
-            </template>
-          </t-submenu>
-          <t-submenu value="/admin/group" title="权限组管理">
-            <template #icon>
-              <icon name="usergroup"></icon>
-            </template>
-            <template #default>
-              <t-menu-item value="/admin/group/manage">
-                <template #icon>
-                  <icon name="tree-round-dot-vertical"></icon>
-                </template>
-                <template #default>权限组配置</template>
-              </t-menu-item>
-            </template>
-          </t-submenu>
-          <t-submenu value="/admin/system" title="系统配置">
-            <template #icon>
-              <icon name="coordinate-system"></icon>
-            </template>
-            <template #default>
-              <t-menu-item value="/admin/system/state">
-                <template #icon>
-                  <icon name="system-application"></icon>
-                </template>
-                <template #default>运行状态</template>
-              </t-menu-item>
-              <t-menu-item value="/admin/system/config">
-                <template #icon>
-                  <icon name="setting"></icon>
-                </template>
-                <template #default>系统配置</template>
-              </t-menu-item>
-              <t-menu-item value="/admin/system/log">
-                <template #icon>
-                  <icon name="system-log"></icon>
-                </template>
-                <template #default>日志审计</template>
-              </t-menu-item>
-            </template>
-          </t-submenu>
+          <menu-item v-for="menu of MENU_LIST" :config="menu"></menu-item>
         </t-menu>
       </t-aside>
       <!-- 页面内容 -->

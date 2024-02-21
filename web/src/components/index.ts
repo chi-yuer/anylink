@@ -7,3 +7,4 @@
  * @Description: 公共组件入口
  */
 
+export { default as MenuItem } from "./menu-item.vue";

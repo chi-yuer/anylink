@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-05 17:02:20
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-20 16:44:58
+ * @LastEditTime: 2024-02-21 14:29:52
  * @FilePath: /anylink/web/src/pages/system/system-config.vue
  * @Description: 系统配置
 -->
@@ -18,7 +18,7 @@ import {
   SSL_TENCENT_CLOUD_CONFIG,
 } from "@/data";
 import { object, string } from "@/lib";
-import { frameworkStore } from "@/plugins";
+import { frameworkStore, router } from "@/plugins";
 import {
   queryAuditConfig,
   queryBaseConfigList,
@@ -42,10 +42,17 @@ import {
 } from "tdesign-vue-next";
 import { computed, reactive, ref } from "vue";
 
+// 入参
+const props = defineProps({
+  category: {
+    type: String,
+    required: true,
+  },
+});
 // 框架状态
 const framework = frameworkStore();
 // 当前选中标签页
-const activePanel = ref(1);
+const activePanel = ref("base");
 // 基本配置列
 const baseConfigColumns: BaseTableCol<BaseConfigRecord>[] = [
   { colKey: "info", title: "配置名" },
@@ -462,24 +469,25 @@ const handleUpdateOtherConfig = (): void => {
  */
 const fetchConfig = (): void => {
   switch (activePanel.value) {
-    case 1:
+    case "base":
       fetchBaseConfigList();
       break;
-    case 2:
+    case "mail":
       fetchMailConfig();
       break;
-    case 3:
+    case "audit":
       fetchAuditConfig();
       break;
-    case 4:
+    case "ssl":
       if (SSLType.value === 2) {
         fetchSSLApplyConfig();
       }
       break;
-    case 5:
+    case "other":
       fetchOtherConfig();
       break;
   }
+  router.push({ path: `/admin/system/config/${activePanel.value}` });
 };
 
 // 获取配置内容
@@ -487,14 +495,14 @@ fetchConfig();
 </script>
 
 <template>
-  <t-tabs :default-value="1" v-model="activePanel" @change="fetchConfig">
+  <t-tabs :default-value="props.category" v-model="activePanel" @change="fetchConfig">
     <!-- 基本配置 -->
-    <t-tab-panel :value="1" label="基本配置">
+    <t-tab-panel value="base" label="基本配置">
       <!-- 基本配置表格 -->
       <t-table row-key="id" :columns="baseConfigColumns" :data="baseConfigLise" bordered></t-table>
     </t-tab-panel>
     <!-- 邮件配置 -->
-    <t-tab-panel :value="2" label="邮件配置">
+    <t-tab-panel value="mail" label="邮件配置">
       <t-form ref="mailConfigForm" :data="mailConfig" :rules="mailConfigRules">
         <t-form-item label="服务器地址" name="host">
           <t-input
@@ -548,15 +556,18 @@ fetchConfig();
       </t-form>
     </t-tab-panel>
     <!-- 审计日志 -->
-    <t-tab-panel :value="3" label="审计日志">
+    <t-tab-panel value="audit" label="审计日志">
       <t-form ref="auditConfigForm" :data="auditConfig" :rules="auditConfigRules">
         <t-form-item label="审计去重时间" name="audit_interval">
           <template #default>
-            <t-input-number
-              v-model="auditConfig.audit_interval"
-              :decimal-places="0"
-              readonly
-            ></t-input-number>
+            <t-space :size="8" align="center">
+              <t-input-number
+                v-model="auditConfig.audit_interval"
+                :decimal-places="0"
+                readonly
+              ></t-input-number>
+              <span>秒</span>
+            </t-space>
           </template>
           <template #tips>
             <span>请手动修改配置文件中的 audit_interval 参数后，再重启服务,</span>
@@ -565,12 +576,15 @@ fetchConfig();
         </t-form-item>
         <t-form-item label="日志保留时间" name="life_day">
           <template #default>
-            <t-input-number
-              v-model="auditConfig.life_day"
-              :decimal-places="0"
-              min="0"
-              max="365"
-            ></t-input-number>
+            <t-space :size="8" align="center">
+              <t-input-number
+                v-model="auditConfig.life_day"
+                :decimal-places="0"
+                min="0"
+                max="365"
+              ></t-input-number>
+              <span>天</span>
+            </t-space>
           </template>
           <template #tips>
             <span>范围: 0 ~ 365天 ,</span>
@@ -589,7 +603,7 @@ fetchConfig();
       </t-form>
     </t-tab-panel>
     <!-- 证书配置 -->
-    <t-tab-panel :value="4" label="证书配置">
+    <t-tab-panel value="ssl" label="证书配置">
       <t-form ref="sslConfigForm" :data="sslConfig" :rules="sslConfigRules">
         <t-form-item label="证书类型">
           <t-radio-group
@@ -699,7 +713,7 @@ fetchConfig();
       </t-form>
     </t-tab-panel>
     <!-- 其它配置 -->
-    <t-tab-panel :value="5" label="其它配置">
+    <t-tab-panel value="other" label="其它配置">
       <t-form ref="otherConfigForm" :data="otherConfig" :rules="otherConfigRules">
         <t-form-item label="VPN 对外地址" name="link_addr">
           <t-input
@@ -712,7 +726,7 @@ fetchConfig();
           <t-textarea
             placeholder="请输入 VPN 连接成功后的 Banner 信息"
             v-model="otherConfig.banner"
-            :autosize="{ minRows: 5 }"
+            :autosize="{ minRows: 6, maxRows: 6 }"
             :style="{ width: '480px' }"
           ></t-textarea>
         </t-form-item>
@@ -720,7 +734,7 @@ fetchConfig();
           <t-textarea
             placeholder="请输入访问首页时的自定义内容"
             v-model="otherConfig.homeindex"
-            :autosize="{ minRows: 5 }"
+            :autosize="{ minRows: 6, maxRows: 12 }"
             :style="{ width: '480px' }"
           ></t-textarea>
         </t-form-item>
@@ -728,7 +742,7 @@ fetchConfig();
           <t-textarea
             placeholder="请输入账户开通时的邮件模板内容"
             v-model="otherConfig.account_mail"
-            :autosize="{ minRows: 5 }"
+            :autosize="{ minRows: 6, maxRows: 12 }"
             :style="{ width: '480px' }"
           ></t-textarea>
         </t-form-item>
