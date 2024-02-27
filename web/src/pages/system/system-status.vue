@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-05 17:02:20
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-27 14:12:38
+ * @LastEditTime: 2024-02-27 14:40:48
  * @FilePath: /anylink/web/src/pages/system/system-status.vue
  * @Description: 系统状态
 -->
@@ -46,9 +46,9 @@ const romItems: ListItemConfig[] = [
 // 运行环境信息
 const envItems: ListItemConfig[] = [
   { label: "应用版本", prop: "sys.appVersion" },
-  { label: "Go 系统", prop: "sys.goOs" },
-  { label: "Go 架构", prop: "sys.goArch" },
-  { label: "Go 版本", prop: "sys.goVersion" },
+  { label: "系统类型", prop: "sys.goOs" },
+  { label: "系统架构", prop: "sys.goArch" },
+  { label: "Go 语言版本", prop: "sys.goVersion" },
   { label: "Go Routine", prop: "sys.goroutine" },
 ];
 // 服务器信息
@@ -165,7 +165,7 @@ fetchSystemInfo();
           </ul>
         </t-space>
       </t-card>
-      <t-card title="RAM 使用率" :bordered="false">
+      <t-card title="内存使用率" :bordered="false">
         <t-space direction="vertical" :style="{ width: '100%' }">
           <t-progress
             theme="circle"
@@ -181,7 +181,7 @@ fetchSystemInfo();
           </ul>
         </t-space>
       </t-card>
-      <t-card title="ROM 使用率" :bordered="false">
+      <t-card title="硬盘使用率" :bordered="false">
         <t-space direction="vertical" :style="{ width: '100%' }">
           <t-progress
             theme="circle"
