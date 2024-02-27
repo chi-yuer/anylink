@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:53:26
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-21 15:24:26
+ * @LastEditTime: 2024-02-27 14:27:32
  * @FilePath: /anylink/web/src/layout/admin-layout.vue
  * @Description: 管理员后台布局
 -->
@@ -12,8 +12,8 @@ import { MenuItem } from "@/components";
 import { MENU_LIST } from "@/data/menu";
 import { frameworkStore, userStore } from "@/plugins";
 import { MenuItemConfig } from "@/types";
-import { Icon, MenuValue } from "tdesign-vue-next";
-import { computed } from "vue";
+import { Icon, MenuValue, MessagePlugin } from "tdesign-vue-next";
+import { computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 // 路由实例
@@ -22,8 +22,10 @@ const router = useRouter();
 const route = useRoute();
 // 用户全局状态
 const user = userStore();
-// 加载动画
+// 框架
 const framework = frameworkStore();
+// 加载动画
+let loadingInstance: ReturnType<typeof MessagePlugin> | null = null;
 
 // 当前激活菜单
 const activeMenu = computed(() => {
@@ -80,6 +82,48 @@ const handleMenuChange = (value: MenuValue): void => {
     router.push({ path: value });
   }
 };
+
+/**
+ * @description: 打开加载消息框
+ * @returns
+ */
+const openLoadingMessage = (): void => {
+  if (loadingInstance) {
+    return;
+  }
+  loadingInstance = MessagePlugin.loading({
+    content: "数据正在加载，请稍候",
+    duration: 0,
+    zIndex: 1001,
+    // attach: "body",
+  });
+};
+
+/**
+ * @description: 关闭加载消息框
+ * @returns
+ */
+const closeLoadingMessage = (): void => {
+  if (loadingInstance) {
+    MessagePlugin.close(loadingInstance);
+    loadingInstance = null;
+  }
+};
+
+// 监听 loading 变化
+watch(
+  () => framework.isLoading,
+  (loading: boolean) => {
+    if (loading) {
+      openLoadingMessage();
+    } else {
+      closeLoadingMessage();
+    }
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <template>
@@ -133,13 +177,15 @@ const handleMenuChange = (value: MenuValue): void => {
         </t-menu>
       </t-aside>
       <!-- 页面内容 -->
-      <t-content v-loading="framework.isLoading" :style="{ height: '100%', overflow: 'auto' }">
+      <t-content :style="{ height: '100%', overflow: 'auto' }">
         <div class="admin-layout__content">
           <router-view></router-view>
         </div>
       </t-content>
     </t-layout>
   </t-layout>
+  <!-- 加载动画 -->
+  <!-- <t-loading :loading="framework.isLoading" fullscreen prevent-scroll-through></t-loading> -->
 </template>
 
 <style lang="scss" scoped>
