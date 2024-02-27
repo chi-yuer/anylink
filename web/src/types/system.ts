@@ -2,10 +2,54 @@
  * @Author: Quarter
  * @Date: 2024-02-19 11:29:13
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-20 15:13:01
+ * @LastEditTime: 2024-02-27 10:25:50
  * @FilePath: /anylink/web/src/types/system.ts
  * @Description: 系统配置
  */
+
+// CPU 信息
+export interface CPUInfo {
+  core: number; // CPU 核心数
+  ghz: string; // CPU 频率
+  modelName: string; // CPU 型号
+  percent: number; // CPU 占用百分比
+}
+
+// ROM 信息
+export interface ROMInfo {
+  free: string; // 剩余空间
+  percent: number; // 占用百分比
+  total: string; // 总空间
+}
+
+// RAM 信息
+export interface RAMInfo {
+  free: string; // 剩余空间
+  percent: number; // 占用百分比
+  total: string; // 总空间
+}
+
+// 应用信息
+export interface ApplicationInfo {
+  appCommitId: string; // 应用提交办办
+  appVersion: string; // 应用版本
+  goArch: string; // Go 架构
+  goOs: string; // Go 操作系统
+  goVersion: string; // Go 版本
+  goroutine: number; // Go 事务数量
+  hostname: string; // 主机名
+  kernel: string; // 内核
+  load: string; // 负载
+  platform: string; // 运行平台
+}
+
+// 系统信息
+export interface SystemInfo {
+  cpu: CPUInfo; // CPU 信息
+  disk: ROMInfo; // 硬盘信息
+  mem: RAMInfo; // 内存信息
+  sys: ApplicationInfo; // 应用信息
+}
 
 // 基础配置记录
 export interface BaseConfigRecord {

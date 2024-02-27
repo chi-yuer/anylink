@@ -8,15 +8,64 @@
  */
 
 import {
+  ApplicationInfo,
   AuditConfig,
+  CPUInfo,
   MailConfig,
   OtherConfig,
+  RAMInfo,
+  ROMInfo,
   SSLALiYunConfig,
   SSLApplyConfig,
   SSLCloudflareConfig,
   SSLCustomConfig,
   SSLTencentCloudConfig,
+  SystemInfo,
 } from "@/types";
+
+// CPU 信息
+export const CPU_INFO: CPUInfo = {
+  core: 0, // CPU 核心数
+  ghz: "0 GHz", // CPU 频率
+  modelName: "", // CPU 型号
+  percent: 0, // CPU 占用百分比
+};
+
+// ROM 信息
+export const ROM_INFO: ROMInfo = {
+  free: "0MB", // 剩余空间
+  percent: 0, // 占用百分比
+  total: "0MB", // 总空间
+};
+
+// RAM 信息
+export const RAM_INFO: RAMInfo = {
+  free: "0MB", // 剩余空间
+  percent: 0, // 占用百分比
+  total: "0MB", // 总空间
+};
+
+// 应用信息
+export const APPLICATION_INFO: ApplicationInfo = {
+  appCommitId: "", // 应用提交办办
+  appVersion: "", // 应用版本
+  goArch: "", // Go 架构
+  goOs: "", // Go 操作系统
+  goVersion: "", // Go 版本
+  goroutine: 0, // Go 事务数量
+  hostname: "", // 主机名
+  kernel: "", // 内核
+  load: "", // 负载
+  platform: "", // 运行平台
+};
+
+// 系统信息
+export const SYSTEM_INFO: SystemInfo = {
+  cpu: CPU_INFO, // CPU 信息
+  disk: ROM_INFO, // 硬盘信息
+  mem: RAM_INFO, // 内存信息
+  sys: APPLICATION_INFO, // 应用信息
+};
 
 // 邮件配置
 export const MAIL_CONFIG: MailConfig = {

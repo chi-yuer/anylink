@@ -9,11 +9,12 @@
 <script lang="ts" setup>
 import { ACCESS_LOG_LIST_PARAM, ACTION_LOG_LIST_PARAM } from "@/data";
 import { date, object } from "@/lib";
-import { frameworkStore, router } from "@/plugins";
+import { frameworkStore } from "@/plugins";
 import { queryAccessLogList, queryActionLogList } from "@/request/log";
 import { AccessLogRecord, ActionLogRecord, ActionTypeOption } from "@/types/log";
 import { BaseTableCol, DateRangeValue, PageInfo } from "tdesign-vue-next";
 import { computed, reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 // 入参
 const props = defineProps({
@@ -24,6 +25,8 @@ const props = defineProps({
 });
 // 框架状态
 const framework = frameworkStore();
+// 路由实例
+const router = useRouter();
 // 当前选中的标签页
 const activePanel = ref("action");
 // 页码

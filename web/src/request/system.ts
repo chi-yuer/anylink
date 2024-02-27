@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-19 11:33:25
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-20 15:12:32
+ * @LastEditTime: 2024-02-27 10:31:08
  * @FilePath: /anylink/web/src/request/system.ts
  * @Description: 系统配置相关
  */
@@ -16,7 +16,14 @@ import {
   OtherConfig,
   SSLApplyConfig,
   SSLCustomConfig,
+  SystemInfo,
 } from "@/types";
+
+/**
+ * @description: 获取系统信息
+ * @returns {Promise<SystemInfo>}
+ */
+export const querySystemInfo = (): Promise<SystemInfo> => request.get<SystemInfo>("/set/system");
 
 /**
  * @description: 获取基本配置列表

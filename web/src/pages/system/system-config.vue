@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-05 17:02:20
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-21 14:29:52
+ * @LastEditTime: 2024-02-21 17:20:22
  * @FilePath: /anylink/web/src/pages/system/system-config.vue
  * @Description: 系统配置
 -->
@@ -18,7 +18,7 @@ import {
   SSL_TENCENT_CLOUD_CONFIG,
 } from "@/data";
 import { object, string } from "@/lib";
-import { frameworkStore, router } from "@/plugins";
+import { frameworkStore } from "@/plugins";
 import {
   queryAuditConfig,
   queryBaseConfigList,
@@ -41,6 +41,7 @@ import {
   UploadFile,
 } from "tdesign-vue-next";
 import { computed, reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 // 入参
 const props = defineProps({
@@ -51,6 +52,8 @@ const props = defineProps({
 });
 // 框架状态
 const framework = frameworkStore();
+// 路由实例
+const router = useRouter();
 // 当前选中标签页
 const activePanel = ref("base");
 // 基本配置列
