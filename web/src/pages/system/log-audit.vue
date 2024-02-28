@@ -11,7 +11,7 @@ import { ACCESS_LOG_LIST_PARAM, ACTION_LOG_LIST_PARAM } from "@/data";
 import { date, object } from "@/lib";
 import { frameworkStore } from "@/plugins";
 import { queryAccessLogList, queryActionLogList } from "@/request/log";
-import { AccessLogRecord, ActionLogRecord, ActionTypeOption } from "@/types/log";
+import { AccessLogRecord, ActionLogRecord, ActionTypeOption } from "@/types";
 import { BaseTableCol, DateRangeValue, PageInfo } from "tdesign-vue-next";
 import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";

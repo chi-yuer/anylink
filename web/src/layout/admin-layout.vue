@@ -2,14 +2,14 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:53:26
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-27 14:27:32
+ * @LastEditTime: 2024-02-27 19:52:36
  * @FilePath: /anylink/web/src/layout/admin-layout.vue
  * @Description: 管理员后台布局
 -->
 <script lang="ts" setup>
 import Logo from "@/assets/logo.svg";
 import { MenuItem } from "@/components";
-import { MENU_LIST } from "@/data/menu";
+import { MENU_LIST } from "@/data";
 import { frameworkStore, userStore } from "@/plugins";
 import { MenuItemConfig } from "@/types";
 import { Icon, MenuValue, MessagePlugin } from "tdesign-vue-next";
@@ -122,7 +122,7 @@ watch(
   },
   {
     immediate: true,
-  }
+  },
 );
 </script>
 

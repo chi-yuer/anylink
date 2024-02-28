@@ -9,5 +9,7 @@
 
 export * from "./group";
 export * from "./log";
+export * from "./menu";
+export * from "./statistics";
 export * from "./system";
 export * from "./user";

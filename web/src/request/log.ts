@@ -9,7 +9,7 @@
 
 import { request } from "@/plugins";
 import { PaginationData, PaginationParam } from "@/types";
-import { AccessLogRecord, ActionLogRecord, ActionTypeOption } from "@/types/log";
+import { AccessLogRecord, ActionLogRecord, ActionTypeOption } from "@/types";
 
 // 活动日志列表参数
 export interface ActionLogListParam {
