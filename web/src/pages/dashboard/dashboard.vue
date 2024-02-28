@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:52:05
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-28 15:00:00
+ * @LastEditTime: 2024-02-28 17:15:02
  * @FilePath: /anylink/web/src/pages/dashboard/dashboard.vue
  * @Description: 管理员首页
 -->
@@ -36,7 +36,7 @@ const framework = frameworkStore();
 // 自动刷新计时器
 let timeout: ReturnType<typeof setTimeout> | null = null;
 // 自动刷新间隔时间
-const autoRefreshTime = 10 * 1000;
+const autoRefreshTime = 6 * 1000;
 // 范围选项列表
 const rangeOptions = [
   { label: "实时", value: "rt" },
@@ -363,13 +363,20 @@ const fetchStatisticsInfo = (loading = true): void => {
   if (loading) {
     framework.loading();
   }
-  Promise.all([
-    fetchStatisticsCount(false),
-    fetchOnlineChartData(false),
-    fetchTrafficChartData(false),
-    fetchCPUChartData(false),
-    fetchRAMChartData(false),
-  ]).finally(() => {
+  const tasks = [fetchStatisticsCount(false)];
+  if (chartTimeScope.online === "rt") {
+    tasks.push(fetchOnlineChartData(false));
+  }
+  if (chartTimeScope.traffic === "rt") {
+    tasks.push(fetchTrafficChartData(false));
+  }
+  if (chartTimeScope.cpu === "rt") {
+    tasks.push(fetchCPUChartData(false));
+  }
+  if (chartTimeScope.ram === "rt") {
+    tasks.push(fetchRAMChartData(false));
+  }
+  Promise.all(tasks).finally(() => {
     if (loading) {
       framework.loaded();
     }

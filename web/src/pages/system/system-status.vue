@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-05 17:02:20
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-27 14:40:48
+ * @LastEditTime: 2024-02-28 17:16:23
  * @FilePath: /anylink/web/src/pages/system/system-status.vue
  * @Description: 系统状态
 -->
@@ -27,7 +27,7 @@ const systemInfo = ref(object.copy(SYSTEM_INFO));
 // 自动刷新计时器
 let timeout: ReturnType<typeof setTimeout> | null = null;
 // 自动刷新间隔时间
-const autoRefreshTime = 10 * 1000;
+const autoRefreshTime = 6 * 1000;
 // CPU 信息
 const cpuItems: ListItemConfig[] = [
   { label: "主频", prop: "cpu.ghz" },
@@ -36,12 +36,12 @@ const cpuItems: ListItemConfig[] = [
 // RAM 信息
 const ramItems: ListItemConfig[] = [
   { label: "总量", prop: "mem.total" },
-  { label: "余量", prop: "mem.free" },
+  { label: "空闲", prop: "mem.free" },
 ];
 // ROM 信息
 const romItems: ListItemConfig[] = [
   { label: "总量", prop: "disk.total" },
-  { label: "余量", prop: "disk.free" },
+  { label: "空闲", prop: "disk.free" },
 ];
 // 运行环境信息
 const envItems: ListItemConfig[] = [
@@ -56,7 +56,10 @@ const serverItems: ListItemConfig[] = [
   { label: "主机名", prop: "sys.hostname" },
   { label: "操作系统", prop: "sys.platform" },
   { label: "内核版本", prop: "sys.kernel" },
-  { label: "CPU", render: () => `${systemInfo.value.cpu.modelName} x${systemInfo.value.cpu.core}` },
+  {
+    label: "中央处理器",
+    render: () => `${systemInfo.value.cpu.modelName} x${systemInfo.value.cpu.core}`,
+  },
 ];
 
 /**
