@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:52:05
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-28 11:35:09
+ * @LastEditTime: 2024-02-28 15:00:00
  * @FilePath: /anylink/web/src/pages/dashboard/dashboard.vue
  * @Description: 管理员首页
 -->
@@ -192,14 +192,14 @@ const fetchTrafficChartData = (loading = true): Promise<void> =>
               name: "上行带宽",
               symbol: "none",
               color: "#008858",
-              data: datas.map(({ up }) => up),
+              data: datas.map(({ up }) => Math.round((up / 1024) * 100) / 100),
             },
             {
               type: "line",
               name: "下行带宽",
               symbol: "none",
               color: "#0052d9",
-              data: datas.map(({ up }) => up),
+              data: datas.map(({ down }) => Math.round((down / 1024) * 100) / 100),
             },
           ],
         });
@@ -248,7 +248,7 @@ const fetchCPUChartData = (loading = true): Promise<void> =>
           series: [
             {
               type: "line",
-              name: "CPU 负载",
+              name: "CPU 占用率",
               symbol: "none",
               color: "#0052d9",
               data: datas.map(({ percent }) => percent),
@@ -300,7 +300,7 @@ const fetchRAMChartData = (loading = true): Promise<void> =>
           series: [
             {
               type: "line",
-              name: "内存负载",
+              name: "内存占用率",
               symbol: "none",
               color: "#0052d9",
               data: datas.map(({ percent }) => percent),
