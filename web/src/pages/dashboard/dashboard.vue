@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:52:05
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-28 17:15:02
+ * @LastEditTime: 2024-02-29 09:31:11
  * @FilePath: /anylink/web/src/pages/dashboard/dashboard.vue
  * @Description: 管理员首页
 -->
@@ -192,14 +192,14 @@ const fetchTrafficChartData = (loading = true): Promise<void> =>
               name: "上行带宽",
               symbol: "none",
               color: "#008858",
-              data: datas.map(({ up }) => Math.round((up / 1024) * 100) / 100),
+              data: datas.map(({ up }) => Math.round((up / Math.pow(1024, 2)) * 8 * 100) / 100),
             },
             {
               type: "line",
               name: "下行带宽",
               symbol: "none",
               color: "#0052d9",
-              data: datas.map(({ down }) => Math.round((down / 1024) * 100) / 100),
+              data: datas.map(({ down }) => Math.round((down / Math.pow(1024, 2)) * 8 * 100) / 100),
             },
           ],
         });
