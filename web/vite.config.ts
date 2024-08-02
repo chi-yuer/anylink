@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 09:43:08
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-05 17:18:45
+ * @LastEditTime: 2024-08-02 10:49:03
  * @FilePath: /anylink/web/vite.config.ts
  * @Description: vite 配置
  */
@@ -16,10 +16,10 @@ import autoprefixer from "autoprefixer";
 // 文档: https://vitejs.dev/config/
 export default defineConfig({
   root: resolve(__dirname, "."),
-  base: "/ui/",
+  base: "/",
   define: {
     __APP__: {
-      base: "/ui/",
+      base: "/",
       version: Package.version,
     },
   },
@@ -51,9 +51,10 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8800",
+        // target: "http://localhost:8800",
+        target: "https://anyconnect-local.lesdev.cn",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

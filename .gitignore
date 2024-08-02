@@ -1,6 +1,7 @@
 # Binaries for programs and plugins
 .idea/
 .vite/
+web/ui
 anylink-deploy
 anylink-deploy.tar.gz
 

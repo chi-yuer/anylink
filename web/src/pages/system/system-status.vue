@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-02-05 17:02:20
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-28 17:16:23
+ * @LastEditTime: 2024-08-02 11:12:47
  * @FilePath: /anylink/web/src/pages/system/system-status.vue
  * @Description: 系统状态
 -->
@@ -11,7 +11,7 @@ import { SYSTEM_INFO } from "@/data";
 import { object, string } from "@/lib";
 import { frameworkStore } from "@/plugins";
 import { querySystemInfo } from "@/request/system";
-import { ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 
 // 列表项配置
 interface ListItemConfig {
@@ -78,12 +78,12 @@ const fetchSystemInfo = (loading = true): void => {
   querySystemInfo()
     .then((data) => {
       systemInfo.value = data;
+      autoRefresh();
     })
     .finally(() => {
       if (loading) {
         framework.loaded();
       }
-      autoRefresh();
     });
 };
 
@@ -145,8 +145,18 @@ watch(
   },
 );
 
-// 获取系统信息
-fetchSystemInfo();
+// 生命周期钩子
+onMounted(() => {
+  fetchSystemInfo();
+});
+
+// 生命周期钩子
+onUnmounted(() => {
+  if (timeout) {
+    clearTimeout(timeout);
+    timeout = null;
+  }
+});
 </script>
 
 <template>

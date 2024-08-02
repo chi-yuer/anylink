@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:58:59
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-05 16:39:50
+ * @LastEditTime: 2024-05-24 16:41:26
  * @FilePath: /anylink/web/src/request/group.ts
  * @Description: 用户组相关
  */
@@ -83,6 +83,7 @@ export const updateGroup = (group: GroupCreateInfo | GroupEditInfo): Promise<voi
         const { ip, net: length } = net.parseRoute(config.val);
         return {
           ...config,
+          port: parseInt(String(config.port), 10),
           val: `${ip}/${length}`,
         };
       }),

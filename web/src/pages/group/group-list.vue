@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-27 15:28:21
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-05 14:18:34
+ * @LastEditTime: 2024-05-23 18:51:53
  * @FilePath: /anylink/web/src/pages/group/group-list.vue
  * @Description: 群组管理
 -->
@@ -121,8 +121,7 @@ const handleCreateGroup = (): void => {
     .validate()
     .then((group) => updateGroup(group))
     .then(() => {
-      confirmEditVisible.value = false;
-      editGroupVisible.value = false;
+      createGroupVisible.value = false;
       MessagePlugin.success("权限组创建成功");
       fetchGroupList();
     })

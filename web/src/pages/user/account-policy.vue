@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-27 15:25:02
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-01 19:15:22
+ * @LastEditTime: 2024-08-02 11:09:24
  * @FilePath: /anylink/web/src/pages/user/account-policy.vue
  * @Description: 用户策略
 -->
@@ -175,7 +175,8 @@ const handleDeleteAccountPolicy = (): void => {
   framework.start();
   deleteAccountPolicy(idFocused.value)
     .then(() => {
-      MessagePlugin.success("账号重连成功");
+      confirmDeleteVisible.value = false;
+      MessagePlugin.success("账户策略删除成功");
       fetchAccountPolicyList();
     })
     .finally(() => {

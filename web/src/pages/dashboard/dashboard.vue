@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-26 10:52:05
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-29 09:31:11
+ * @LastEditTime: 2024-08-02 10:45:03
  * @FilePath: /anylink/web/src/pages/dashboard/dashboard.vue
  * @Description: 管理员首页
 -->
@@ -21,7 +21,7 @@ import {
 } from "@/request/statistics";
 import { StatisticsCount } from "@/types";
 import * as echarts from "echarts";
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, onUnmounted, reactive, ref, watch } from "vue";
 
 // 在线人数图表容器
 const onlineChartContainer = ref<HTMLDivElement | null>(null);
@@ -84,19 +84,20 @@ const fetchGroupList = (): void => {
  * @returns {Promise<void>}
  */
 const fetchStatisticsCount = (loading = true): Promise<void> =>
-  new Promise<void>((resolve) => {
+  new Promise<void>((resolve, reject) => {
     if (loading) {
       framework.loading();
     }
     queryStatistics()
       .then(({ counts }) => {
         Object.assign(statisticsCount, counts);
+        resolve();
       })
+      .catch((e) => reject(e))
       .finally(() => {
         if (loading) {
           framework.loaded();
         }
-        resolve();
       });
   });
 
@@ -106,7 +107,7 @@ const fetchStatisticsCount = (loading = true): Promise<void> =>
  * @returns {Promise<void>}
  */
 const fetchOnlineChartData = (loading = true): Promise<void> =>
-  new Promise<void>((resolve) => {
+  new Promise<void>((resolve, reject) => {
     if (loading) {
       framework.loading();
     }
@@ -145,12 +146,13 @@ const fetchOnlineChartData = (loading = true): Promise<void> =>
             },
           ],
         });
+        resolve();
       })
+      .catch((e) => reject(e))
       .finally(() => {
         if (loading) {
           framework.loaded();
         }
-        resolve();
       });
   });
 
@@ -160,7 +162,7 @@ const fetchOnlineChartData = (loading = true): Promise<void> =>
  * @returns {Promise<void>}
  */
 const fetchTrafficChartData = (loading = true): Promise<void> =>
-  new Promise<void>((resolve) => {
+  new Promise<void>((resolve, reject) => {
     if (loading) {
       framework.loading();
     }
@@ -203,12 +205,13 @@ const fetchTrafficChartData = (loading = true): Promise<void> =>
             },
           ],
         });
+        resolve();
       })
+      .catch((e) => reject(e))
       .finally(() => {
         if (loading) {
           framework.loaded();
         }
-        resolve();
       });
   });
 
@@ -218,7 +221,7 @@ const fetchTrafficChartData = (loading = true): Promise<void> =>
  * @returns {Promise<void>}
  */
 const fetchCPUChartData = (loading = true): Promise<void> =>
-  new Promise<void>((resolve) => {
+  new Promise<void>((resolve, reject) => {
     if (loading) {
       framework.loading();
     }
@@ -255,12 +258,15 @@ const fetchCPUChartData = (loading = true): Promise<void> =>
             },
           ],
         });
+        resolve();
+      })
+      .catch((e) => {
+        reject(e);
       })
       .finally(() => {
         if (loading) {
           framework.loaded();
         }
-        resolve();
       });
   });
 
@@ -270,7 +276,7 @@ const fetchCPUChartData = (loading = true): Promise<void> =>
  * @returns {Promise<void>}
  */
 const fetchRAMChartData = (loading = true): Promise<void> =>
-  new Promise<void>((resolve) => {
+  new Promise<void>((resolve, reject) => {
     if (loading) {
       framework.loading();
     }
@@ -307,12 +313,13 @@ const fetchRAMChartData = (loading = true): Promise<void> =>
             },
           ],
         });
+        resolve();
       })
+      .catch((e) => reject(e))
       .finally(() => {
         if (loading) {
           framework.loaded();
         }
-        resolve();
       });
   });
 
@@ -376,12 +383,15 @@ const fetchStatisticsInfo = (loading = true): void => {
   if (chartTimeScope.ram === "rt") {
     tasks.push(fetchRAMChartData(false));
   }
-  Promise.all(tasks).finally(() => {
-    if (loading) {
-      framework.loaded();
-    }
-    autoRefresh();
-  });
+  Promise.all(tasks)
+    .then(() => {
+      autoRefresh();
+    })
+    .finally(() => {
+      if (loading) {
+        framework.loaded();
+      }
+    });
 };
 
 /**
@@ -417,6 +427,14 @@ fetchGroupList();
 // 生命周期钩子
 onMounted(() => {
   fetchStatisticsInfo();
+});
+
+// 生命周期钩子
+onUnmounted(() => {
+  if (timeout) {
+    clearTimeout(timeout);
+    timeout = null;
+  }
 });
 </script>
 

@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-27 15:26:13
  * @LastEditors: Quarter
- * @LastEditTime: 2024-01-31 16:15:52
+ * @LastEditTime: 2024-08-02 11:10:45
  * @FilePath: /anylink/web/src/pages/user/online-user.vue
  * @Description: 在线用户
 -->
@@ -10,7 +10,7 @@
 import * as definition from "@/definition";
 import { date } from "@/lib";
 import { frameworkStore } from "@/plugins";
-import { queryOnlineAccountList, reconnectAccount } from "@/request/user";
+import { kickAccount, queryOnlineAccountList, reconnectAccount } from "@/request/user";
 import { AccountOnlineRecord } from "@/types";
 import { BaseTableCol, Icon, MessagePlugin } from "tdesign-vue-next";
 import { onBeforeUnmount, ref, watch } from "vue";
@@ -108,6 +108,7 @@ const handleReconnectAccount = (): void => {
   framework.start();
   reconnectAccount(tokenFocused.value)
     .then(() => {
+      confirmReconnectVisible.value = false;
       MessagePlugin.success("账号重连成功");
       fetchOnlineAccountList();
     })
@@ -135,9 +136,10 @@ const handleKickAccount = (): void => {
     return;
   }
   framework.start();
-  reconnectAccount(tokenFocused.value)
+  kickAccount(tokenFocused.value)
     .then(() => {
-      MessagePlugin.success("账号重连成功");
+      confirmKickVisible.value = false;
+      MessagePlugin.success("账号下线成功");
       fetchOnlineAccountList();
     })
     .finally(() => {

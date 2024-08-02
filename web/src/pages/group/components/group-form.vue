@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-29 21:24:11
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-05 17:12:09
+ * @LastEditTime: 2024-05-23 19:01:11
  * @FilePath: /anylink/web/src/pages/group/components/group-form.vue
  * @Description: 权限组表单
 -->
@@ -418,6 +418,14 @@ defineExpose({
             v-model="groupInfo.name"
             maxlength="30"
             :readonly="isEdit"
+            clearable
+          ></t-input>
+        </t-form-item>
+        <t-form-item label="备注" name="note">
+          <t-input
+            placeholder="请输入权限组备注"
+            v-model="groupInfo.note"
+            maxlength="60"
             clearable
           ></t-input>
         </t-form-item>

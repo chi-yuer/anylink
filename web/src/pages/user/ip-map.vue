@@ -2,7 +2,7 @@
  * @Author: Quarter
  * @Date: 2024-01-27 15:25:33
  * @LastEditors: Quarter
- * @LastEditTime: 2024-02-01 09:10:22
+ * @LastEditTime: 2024-05-10 16:40:23
  * @FilePath: /anylink/web/src/pages/user/ip-map.vue
  * @Description: IP 映射
 -->
@@ -175,8 +175,15 @@ const handleDeleteIPMap = (): void => {
   framework.start();
   deleteIPMap(idFocused.value)
     .then(() => {
-      MessagePlugin.success("账号重连成功");
+      confirmDeleteVisible.value = false;
+      MessagePlugin.success("IP 映射删除成功");
       fetchIPMapList();
+      if (ipMapList.value.length <= 1 && pageNo.value > 1) {
+        pageNo.value -= 1;
+        fetchIPMapList();
+      } else {
+        fetchIPMapList();
+      }
     })
     .finally(() => {
       framework.end();
